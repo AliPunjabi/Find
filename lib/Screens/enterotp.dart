@@ -1,32 +1,16 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:find/Screens/enterotp.dart';
 import 'package:flutter/material.dart';
 import 'package:find/globals.dart';
-import 'package:get/get.dart';
 
-class EnterPhoneScreen extends StatefulWidget {
-  @override
-  _EnterPhoneScreenState createState() => _EnterPhoneScreenState();
-}
+class EnterOtp extends StatelessWidget {
+  final String phoneNumber;
 
-class _EnterPhoneScreenState extends State<EnterPhoneScreen> {
-  final TextEditingController phoneController = TextEditingController();
+  EnterOtp({required this.phoneNumber});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
-                'assets/flag.png'), // Update with the path of your asset
-          ),
-        ],
-      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(left: 10.0, right: 10.0),
@@ -42,14 +26,14 @@ class _EnterPhoneScreenState extends State<EnterPhoneScreen> {
                   width: 100.0, // You can adjust this as needed
                   height: 100.0, // You can adjust this as needed
                   child: Image.asset(
-                    'assets/phonelogo.png',
+                    'assets/otplogo.png',
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
               SizedBox(height: 40.0),
               Text(
-                'Welcome to Find',
+                'We Texted You',
                 style: TextStyle(
                   color: Globals.headingTextColor,
                   fontSize: 24.0,
@@ -65,13 +49,11 @@ class _EnterPhoneScreenState extends State<EnterPhoneScreen> {
                   ),
                   children: <TextSpan>[
                     TextSpan(
-                        text: 'Enter your phone number below to get into '),
+                        text:
+                            'Enter the code that we sent you on ""$phoneNumber"" '),
                     TextSpan(
                       text: 'Find',
-                      style: TextStyle(
-                        fontStyle: FontStyle.italic,
-                        color: Globals.headingTextColor,
-                      ),
+                      style: TextStyle(),
                     ),
                   ],
                 ),
@@ -87,7 +69,6 @@ class _EnterPhoneScreenState extends State<EnterPhoneScreen> {
               ),
               SizedBox(height: 10.0),
               TextField(
-                controller: phoneController,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -114,18 +95,7 @@ class _EnterPhoneScreenState extends State<EnterPhoneScreen> {
                 child: Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: () {
-                      String phoneNumber = phoneController.text.trim();
-                      if (phoneNumber.isNotEmpty) {
-                        Get.to(
-                          () => EnterOtp(phoneNumber: phoneNumber),
-                          transition: Transition.fade,
-                        );
-                      } else {
-                        Get.snackbar(
-                            'Error', 'Please enter your phone number.');
-                      }
-                    },
+                    onTap: () {},
                     child: Stack(
                       alignment: Alignment.center,
                       children: <Widget>[
