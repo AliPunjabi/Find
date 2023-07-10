@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:find/Controllers/language_controller.dart';
 import 'package:find/Screens/enterotp.dart';
 import 'package:flutter/material.dart';
 import 'package:find/globals.dart';
@@ -13,6 +14,8 @@ class EnterPhoneScreen extends StatefulWidget {
 
 class _EnterPhoneScreenState extends State<EnterPhoneScreen> {
   final TextEditingController phoneController = TextEditingController();
+  final languageController = Get.put(LanguageController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,10 +24,21 @@ class _EnterPhoneScreenState extends State<EnterPhoneScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
-                'assets/flag.png'), // Update with the path of your asset
+          InkWell(
+            onTap: () {
+              // Switch language when flag is tapped
+              String currentLocale = Get.locale!.languageCode;
+              if (currentLocale == 'en') {
+                languageController.switchLanguage('ar', 'ae');
+              } else {
+                languageController.switchLanguage('en', 'US');
+              }
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset(
+                  'assets/flag.png'), // Update with the path of your asset
+            ),
           ),
         ],
       ),
@@ -50,7 +64,7 @@ class _EnterPhoneScreenState extends State<EnterPhoneScreen> {
               ),
               SizedBox(height: 40.0),
               Text(
-                'Welcome to Find',
+                "welcome".tr,
                 style: TextStyle(
                   color: Globals.headingTextColor,
                   fontSize: 24.0,
@@ -66,7 +80,7 @@ class _EnterPhoneScreenState extends State<EnterPhoneScreen> {
                   ),
                   children: <TextSpan>[
                     TextSpan(
-                        text: 'Enter your phone number below to get into '),
+                        text: 'enter_phone'.tr),
                     TextSpan(
                       text: 'Find',
                       style: TextStyle(
@@ -79,7 +93,7 @@ class _EnterPhoneScreenState extends State<EnterPhoneScreen> {
               ),
               SizedBox(height: 10.0),
               Text(
-                'Phone',
+                'phone'.tr,
                 style: TextStyle(
                   color: Globals.headingTextColor,
                   fontSize: 18.0,
@@ -88,7 +102,9 @@ class _EnterPhoneScreenState extends State<EnterPhoneScreen> {
               ),
               SizedBox(height: 10.0),
               TextField(
-                style: TextStyle(fontFamily: 'Roboto', ),
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                ),
                 controller: phoneController,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
@@ -138,7 +154,7 @@ class _EnterPhoneScreenState extends State<EnterPhoneScreen> {
                       alignment: Alignment.center,
                       children: <Widget>[
                         Text(
-                          'CONTINUE',
+                          'continue'.tr,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 18.0,
