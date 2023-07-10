@@ -3,6 +3,7 @@
 import 'package:find/Screens/enterotp.dart';
 import 'package:flutter/material.dart';
 import 'package:find/globals.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class EnterPhoneScreen extends StatefulWidget {
@@ -87,6 +88,7 @@ class _EnterPhoneScreenState extends State<EnterPhoneScreen> {
               ),
               SizedBox(height: 10.0),
               TextField(
+                style: TextStyle(fontFamily: 'Roboto', ),
                 controller: phoneController,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
@@ -95,11 +97,17 @@ class _EnterPhoneScreenState extends State<EnterPhoneScreen> {
                     borderSide:
                         BorderSide(color: Globals.dullTextColor, width: 1.0),
                   ),
-                  prefixText: '+966',
+                  prefixText: '+966 ',
                   prefixStyle: TextStyle(
+                    fontSize: 16,
                     color: Globals.headingTextColor,
-                    fontFamily: 'HeadingNow',
-                  ), // if you want to label your text field
+                    fontFamily: 'Roboto',
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide:
+                        BorderSide(color: Globals.dullTextColor, width: 1.0),
+                  ),
                 ),
               ),
               SizedBox(height: 20.0),
