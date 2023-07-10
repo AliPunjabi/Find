@@ -15,6 +15,6 @@ class Globals {
       Color(0xFF20BD52), // Hex: #20BD52
     ],
     begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
+    end: Alignment.topRight,
   );
 }
