@@ -112,6 +112,36 @@ class CategoriesScreen extends StatelessWidget {
           );
         }
       }),
+      floatingActionButton: Container(
+  padding: EdgeInsets.all(8),
+  decoration: BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.circular(30), // Adjust the radius to control the roundness
+    boxShadow: [
+      BoxShadow(
+        color: Colors.grey.withOpacity(0.5),
+        spreadRadius: 2,
+        blurRadius: 7,
+        offset: Offset(0, 3),
+      ),
+    ],
+  ),
+  child: Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Icon(
+        Icons.explore,
+        color: Globals.headingTextColor,
+      ),
+      SizedBox(width: 8),
+      Text(
+        "around".tr,
+        style: TextStyle(color: Globals.headingTextColor),
+      ),
+    ],
+  ),
+),
+
     );
   }
 }

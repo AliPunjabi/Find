@@ -50,9 +50,10 @@ class _EnterOtpState extends State<EnterOtp> {
     );
   }
 final FirebaseAuth auth = FirebaseAuth.instance; 
+String code = '';
   @override
   Widget build(BuildContext context) {
-    String code = '';
+    
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -88,7 +89,7 @@ final FirebaseAuth auth = FirebaseAuth.instance;
               ),
               SizedBox(height: 40.0),
               Text(
-                'We Texted You',
+                'otpwelcome'.tr,
                 style: TextStyle(
                   color: Globals.headingTextColor,
                   fontSize: 24.0,
@@ -105,7 +106,7 @@ final FirebaseAuth auth = FirebaseAuth.instance;
                   children: <TextSpan>[
                     TextSpan(
                         text:
-                            'Enter the code that we sent you on +966${widget.phoneNumber} '),
+                            '${'enterotp'.tr}+966${widget.phoneNumber} '),
                   ],
                 ),
               ),
@@ -147,7 +148,7 @@ final FirebaseAuth auth = FirebaseAuth.instance;
                       .box, 
                   borderRadius: BorderRadius.circular(10),
                   fieldHeight: 50,
-                  fieldWidth: 80,
+                  fieldWidth: 50,
                   activeFillColor: Colors.white,
                   inactiveFillColor: Colors.white,
                   activeColor: Globals.dullTextColor,

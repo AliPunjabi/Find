@@ -12,7 +12,10 @@ class AppTranslations extends Translations {
     'error1': "Error",
     'Success': 'Success',
     'cattitle': 'Food & Drinks',
-    'deliver': 'Delivered to '
+    'deliver': 'Delivered to ',
+    'otpwelcome': 'We Texted You',
+    'enterotp': 'Enter the code that we sent you on ',
+    'around': 'Around me'
   },
 'ar_ae':{
     'welcome': 'مرحبا بك في البحث',
@@ -23,7 +26,10 @@ class AppTranslations extends Translations {
     'error1': 'خطأ',
     'Success': 'نجاح',
     'cattitle': 'أطعمة ومشروبات',
-    'deliver': 'سلمت ل '
+    'deliver': 'سلمت ل ',
+    'otpwelcome': 'لقد أرسلنا لك رسالة نصية',
+    'enterotp': 'أدخل الرمز الذي أرسلناه لك ',
+    'around': 'حولي'
   }
   };
 }

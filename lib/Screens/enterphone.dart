@@ -115,7 +115,11 @@ class _EnterPhoneScreenState extends State<EnterPhoneScreen> {
                     borderSide:
                         BorderSide(color: Globals.dullTextColor, width: 1.0),
                   ),
-                  prefixText: '+966 ',
+                  prefixIcon: Padding(padding: EdgeInsets.fromLTRB(15, 15, 8, 15), child: Text('+92 ', style: TextStyle(
+                    fontSize: 16,
+                    color: Globals.headingTextColor,
+                    fontFamily: 'Roboto',
+                  ),)),
                   prefixStyle: TextStyle(
                     fontSize: 16,
                     color: Globals.headingTextColor,
@@ -145,30 +149,30 @@ class _EnterPhoneScreenState extends State<EnterPhoneScreen> {
 
                       if (phoneNumber.isNotEmpty) {
                         try {
-                          await FirebaseAuth.instance.verifyPhoneNumber(
-                              phoneNumber: '+92$phoneNumber',
-                              verificationCompleted:
-                                  (PhoneAuthCredential credential) {},
-                              verificationFailed: (FirebaseAuthException e) {},
-                              codeAutoRetrievalTimeout:
-                                  (String verificationId) {},
-                              codeSent:
-                                  (String verificationId, int? resendToken) {
-                                String verification = verificationId;
+                          // await FirebaseAuth.instance.verifyPhoneNumber(
+                          //     phoneNumber: '+92$phoneNumber',
+                          //     verificationCompleted:
+                          //         (PhoneAuthCredential credential) {},
+                          //     verificationFailed: (FirebaseAuthException e) {},
+                          //     codeAutoRetrievalTimeout:
+                          //         (String verificationId) {},
+                          //     codeSent:
+                          //         (String verificationId, int? resendToken) {
+                          //       String verification = verificationId;
+                          //       Get.to(
+                          //           () => EnterOtp(
+                          //               phoneNumber: phoneNumber,
+                          //               verify: verification),
+                          //           transition: Transition.fadeIn,
+                          //           duration: Duration(seconds: 2));
                                 Get.to(
-                                    () => EnterOtp(
-                                        phoneNumber: phoneNumber,
-                                        verify: verification),
-                                    transition: Transition.fadeIn,
-                                    duration: Duration(seconds: 2));
-                                // Get.to(
-                                //   () => CategoriesScreen(),
-                                //   transition: Transition.fadeIn,
-                                //      duration: Duration(seconds: 2));
+                                  () => CategoriesScreen(),
+                                  transition: Transition.fadeIn,
+                                     duration: Duration(seconds: 2));
                                 
                               }
-                          );
-                        }
+                          
+                        
                          catch (e) {
                           Get.snackbar('Error', 'Fail.');
                         }
