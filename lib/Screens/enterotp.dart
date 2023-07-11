@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, must_be_immutable
 
+import 'package:find/Screens/categories.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:find/globals.dart';
@@ -133,7 +134,7 @@ final FirebaseAuth auth = FirebaseAuth.instance;
                 textStyle: TextStyle(
                   fontFamily: 'Roboto'
                 ),
-                length: 4, // number of digits in the OTP
+                length: 6, // number of digits in the OTP
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   code = value;
@@ -168,9 +169,23 @@ final FirebaseAuth auth = FirebaseAuth.instance;
                   color: Colors.transparent,
                   child: InkWell(
                     onTap: () async{
-                      PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: widget.verify, smsCode: code);
+                      try{
+                        PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: widget.verify, smsCode: code);
                       await auth.signInWithCredential(credential);
-                    },
+                       Get.snackbar(
+                            'Success', 'Moving to next screen');
+                            Get.offAll(()=> CategoriesScreen(),
+                                  transition: Transition.fadeIn,
+                                     duration: Duration(seconds: 2));
+                      
+                      }
+                      catch(e){
+                         Get.snackbar(
+                            'error1'.tr, 'Invalid OTP');
+                      }
+                      },
+                      
+                    
                     child: Stack(
                       alignment: Alignment.center,
                       children: <Widget>[

@@ -6,8 +6,9 @@ class Globals {
   static const Color headingTextColor = Color(0xFF07052A); // Hex: #07052A
   static const Color dullTextColor = Color(0xFF8C919D); // Hex: #8C919D
   static const Color greenTextColor = Color(0xFF2CA66F); // Hex: #2CA66F
-  static const Color highlightColorText = Color(0xFFE95F36); // Hex: #E95F36
-
+  static const Color highlightColorText = Color(0xFFE95F36);
+   // Hex: #E95F36
+static const Color scaffColorText = Color(0xFFD9D9D9);
     // Gradient for Button
   static const LinearGradient buttonGradient = LinearGradient(
     colors: [

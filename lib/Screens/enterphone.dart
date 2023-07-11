@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:find/Controllers/language_controller.dart';
+import 'package:find/Models/categModel.dart';
+import 'package:find/Screens/categories.dart';
 import 'package:find/Screens/enterotp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +11,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class EnterPhoneScreen extends StatefulWidget {
-  
   @override
   _EnterPhoneScreenState createState() => _EnterPhoneScreenState();
 }
@@ -81,8 +82,7 @@ class _EnterPhoneScreenState extends State<EnterPhoneScreen> {
                     fontFamily: 'HeadingNow',
                   ),
                   children: <TextSpan>[
-                    TextSpan(
-                        text: 'enter_phone'.tr),
+                    TextSpan(text: 'enter_phone'.tr),
                     TextSpan(
                       text: 'Find',
                       style: TextStyle(
@@ -140,28 +140,42 @@ class _EnterPhoneScreenState extends State<EnterPhoneScreen> {
                 child: Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: () async{
+                    onTap: () async {
                       String phoneNumber = phoneController.text.trim();
-                      await FirebaseAuth.instance.verifyPhoneNumber(
-                        phoneNumber: '+92$phoneNumber',
-                        verificationCompleted: (PhoneAuthCredential credential){},
-                        verificationFailed: (FirebaseAuthException e){},
-                        codeSent: (String verificationId, int? resendToken){
-                          String verification = verificationId;
-                           if (phoneNumber.isNotEmpty) {
-                        Get.to(
-                          () => EnterOtp(phoneNumber: phoneNumber,verify: verification),
-                          transition: Transition.fadeIn,
-                          duration: Duration(seconds: 1)
-                        );
+
+                      if (phoneNumber.isNotEmpty) {
+                        try {
+                          await FirebaseAuth.instance.verifyPhoneNumber(
+                              phoneNumber: '+92$phoneNumber',
+                              verificationCompleted:
+                                  (PhoneAuthCredential credential) {},
+                              verificationFailed: (FirebaseAuthException e) {},
+                              codeAutoRetrievalTimeout:
+                                  (String verificationId) {},
+                              codeSent:
+                                  (String verificationId, int? resendToken) {
+                                String verification = verificationId;
+                                Get.to(
+                                    () => EnterOtp(
+                                        phoneNumber: phoneNumber,
+                                        verify: verification),
+                                    transition: Transition.fadeIn,
+                                    duration: Duration(seconds: 2));
+                                // Get.to(
+                                //   () => CategoriesScreen(),
+                                //   transition: Transition.fadeIn,
+                                //      duration: Duration(seconds: 2));
+                                
+                              }
+                          );
+                        }
+                         catch (e) {
+                          Get.snackbar('Error', 'Fail.');
+                        }
                       } else {
                         Get.snackbar(
                             'Error', 'Please enter your phone number.');
                       }
-                        },
-                        codeAutoRetrievalTimeout: (String verificationId){}
-                      );
-                     
                     },
                     child: Stack(
                       alignment: Alignment.center,
