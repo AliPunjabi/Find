@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, must_be_immutable
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:find/globals.dart';
 import 'package:get/get.dart';
@@ -8,9 +9,9 @@ import 'dart:async';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class EnterOtp extends StatefulWidget {
-  final String phoneNumber;
+  final String phoneNumber, verify;
 
-  EnterOtp({required this.phoneNumber});
+  EnterOtp({required this.phoneNumber, required this.verify});
 
   @override
   State<EnterOtp> createState() => _EnterOtpState();
@@ -47,9 +48,10 @@ class _EnterOtpState extends State<EnterOtp> {
       ),
     );
   }
-
+final FirebaseAuth auth = FirebaseAuth.instance; 
   @override
   Widget build(BuildContext context) {
+    String code = '';
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -134,6 +136,7 @@ class _EnterOtpState extends State<EnterOtp> {
                 length: 4, // number of digits in the OTP
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
+                  code = value;
                   // handle the value as per your needs
                 },
                 appContext: context,
@@ -164,7 +167,10 @@ class _EnterOtpState extends State<EnterOtp> {
                 child: Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () async{
+                      PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: widget.verify, smsCode: code);
+                      await auth.signInWithCredential(credential);
+                    },
                     child: Stack(
                       alignment: Alignment.center,
                       children: <Widget>[

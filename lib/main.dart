@@ -4,11 +4,14 @@ import 'package:find/Controllers/language_controller.dart';
 import 'package:find/Screens/enterphone.dart';
 import 'package:find/localization/app_translations.dart';
 import 'package:find/localization/localization_delegate.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+await Firebase.initializeApp();
   runApp(const MyApp());
 }
 

@@ -2,12 +2,14 @@
 
 import 'package:find/Controllers/language_controller.dart';
 import 'package:find/Screens/enterotp.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:find/globals.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class EnterPhoneScreen extends StatefulWidget {
+  
   @override
   _EnterPhoneScreenState createState() => _EnterPhoneScreenState();
 }
@@ -138,11 +140,17 @@ class _EnterPhoneScreenState extends State<EnterPhoneScreen> {
                 child: Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: () {
+                    onTap: () async{
                       String phoneNumber = phoneController.text.trim();
-                      if (phoneNumber.isNotEmpty) {
+                      await FirebaseAuth.instance.verifyPhoneNumber(
+                        phoneNumber: '+92$phoneNumber',
+                        verificationCompleted: (PhoneAuthCredential credential){},
+                        verificationFailed: (FirebaseAuthException e){},
+                        codeSent: (String verificationId, int? resendToken){
+                          String verification = verificationId;
+                           if (phoneNumber.isNotEmpty) {
                         Get.to(
-                          () => EnterOtp(phoneNumber: phoneNumber),
+                          () => EnterOtp(phoneNumber: phoneNumber,verify: verification),
                           transition: Transition.fadeIn,
                           duration: Duration(seconds: 1)
                         );
@@ -150,6 +158,10 @@ class _EnterPhoneScreenState extends State<EnterPhoneScreen> {
                         Get.snackbar(
                             'Error', 'Please enter your phone number.');
                       }
+                        },
+                        codeAutoRetrievalTimeout: (String verificationId){}
+                      );
+                     
                     },
                     child: Stack(
                       alignment: Alignment.center,
