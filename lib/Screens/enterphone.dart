@@ -143,7 +143,8 @@ class _EnterPhoneScreenState extends State<EnterPhoneScreen> {
                       if (phoneNumber.isNotEmpty) {
                         Get.to(
                           () => EnterOtp(phoneNumber: phoneNumber),
-                          transition: Transition.fade,
+                          transition: Transition.fadeIn,
+                          duration: Duration(seconds: 1)
                         );
                       } else {
                         Get.snackbar(
