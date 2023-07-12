@@ -149,30 +149,30 @@ class _EnterPhoneScreenState extends State<EnterPhoneScreen> {
 
                       if (phoneNumber.isNotEmpty) {
                         try {
-                          // await FirebaseAuth.instance.verifyPhoneNumber(
-                          //     phoneNumber: '+92$phoneNumber',
-                          //     verificationCompleted:
-                          //         (PhoneAuthCredential credential) {},
-                          //     verificationFailed: (FirebaseAuthException e) {},
-                          //     codeAutoRetrievalTimeout:
-                          //         (String verificationId) {},
-                          //     codeSent:
-                          //         (String verificationId, int? resendToken) {
-                          //       String verification = verificationId;
-                          //       Get.to(
-                          //           () => EnterOtp(
-                          //               phoneNumber: phoneNumber,
-                          //               verify: verification),
-                          //           transition: Transition.fadeIn,
-                          //           duration: Duration(seconds: 2));
+                          await FirebaseAuth.instance.verifyPhoneNumber(
+                              phoneNumber: '+92$phoneNumber',
+                              verificationCompleted:
+                                  (PhoneAuthCredential credential) {},
+                              verificationFailed: (FirebaseAuthException e) {},
+                              codeAutoRetrievalTimeout:
+                                  (String verificationId) {},
+                              codeSent:
+                                  (String verificationId, int? resendToken) {
+                                String verification = verificationId;
                                 Get.to(
-                                  () => CategoriesScreen(),
-                                  transition: Transition.fadeIn,
-                                     duration: Duration(seconds: 2));
+                                    () => EnterOtp(
+                                        phoneNumber: phoneNumber,
+                                        verify: verification),
+                                    transition: Transition.fadeIn,
+                                    duration: Duration(seconds: 2));
+                                // Get.to(
+                                //   () => CategoriesScreen(),
+                                //   transition: Transition.fadeIn,
+                                //      duration: Duration(seconds: 2));
                                 
                               }
-                          
-                        
+                          );
+                        }
                          catch (e) {
                           Get.snackbar('Error', 'Fail.');
                         }
